@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 /**
  * GreeterController
  */
@@ -30,6 +32,10 @@ public class GreeterController {
     @GetMapping("/")
     public String greet() {
         count++;
+        try {
+            SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+        }
         return String.format(RESPONSE_STRING_FORMAT, prefix, HOSTNAME, count);
     }
 
